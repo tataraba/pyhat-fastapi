@@ -1,0 +1,17 @@
+[tool.pdm]
+
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Mario Munoz", email = "pythonbynight@gmail.com"},
+]
+dependencies = [
+    "fastapi>=0.95.1",
+    "uvicorn[standard]>=0.22.0",
+    "pytailwindcss>=0.1.4",
+    "Jinja2>=3.1.2",
+]
+requires-python = ">=3.11"
+license = {text = "MIT"}
