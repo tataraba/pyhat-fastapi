@@ -22,7 +22,7 @@
 
 ## About <a name = "about"></a>
 
-This is an exploratory project to asses the workflow of a PyHAT stack using FastAPI as the web framework. I'll be jotting down notes as I go.
+This is an exploratory project to asses the workflow of a [PyHAT stack](https://github.com/PyHAT-stack/awesome-python-htmx) using FastAPI as the web framework. I'll be jotting down notes as I go.
 
 ## Getting Started <a name = "getting_started"></a>
 
