@@ -19,6 +19,8 @@
     - [Headers](#headers)
     - [Post Requests and CSRF Protection](#post-requests-and-csrf-protection)
     - [Partials/Fragments](#partialsfragments)
+    - [Forms](#forms)
+    - [Testing](#testing)
 
 ## About <a name = "about"></a>
 
@@ -316,9 +318,10 @@ With htmx, you can include the token in a custom request header.
 
 In this case, FastAPI does not have a solution out of the box for CSRF protection.
 
-If your app requires CSRF protection, there are options with external libraries, such as `FastAPI JWT Auth` or `FastAPI CSRF Protect`.
+If your app requires CSRF protection, there are options with external libraries, such as `FastAPI JWT Auth` or `FastAPI CSRF Protect` or `csrf-starlette-fastapi`.
 
-The latter seems to be fairly lightweight, but would need to test how to incorporate it into PyHAT stack.
+> **Note** You may not even really need CSRF protection due to how modern browsers handle SameSite cookies. There are [some edge cases](https://simonwillison.net/2021/Aug/3/samesite/) (detailed by Simon Willison) for which you'd still want to explicitly set up protection. But otherwise, you may be okay without it. See more at the [csrf-starlette-fastapi](https://github.com/gnat/csrf-starlette-fastapi) repo.
+>
 
 Another consideration with FastAPI is how routes are defined with the corresponding HTTP verb.
 
@@ -352,3 +355,26 @@ The TLDR version goes something like:
 - A package like `jinja2-fragments` allows you to render a _fragment_ of an existing template, without the need for multiple smaller files
 - You can read about this pattern over at htmx.org in an essay titled [Template Fragments](https://htmx.org/essays/template-fragments/)
 
+### Forms
+
+Rendering forms in Django is, admittedly, pretty great because of the abstraction that allows you to define all input/validation in the same place.
+
+Form handling with FastAPI is still pretty good, due to the type-hint system providing a certain level of validation.
+
+However, this level of abstraction may make it a little less straightforward when adding styling/htmx attributes to each element of a form. In one sense, building forms "by hand" might actually be more useful.
+
+But again, your mileage may vary depending on how much boilerplate you want to be writing in a larger web application.
+
+With htmx, ensuring that the "submit" button of a form does a server call without leaving the page (and updating the form inplace) is fairly straightforward.
+
+But providing inline validation as a user enters data in totally plausible.
+
+I'll have to do some more experimentation to see how this might fit in within the PyHAT context.
+
+### Testing
+
+I want to flesh this out more. I think testing would be a lot more manageable if most of the route/view logic is kept segregated from the views.
+
+But for more robust testing, I am thinking of [Playwright](https://playwright.dev/python/docs/intro), but I don't have much experience with it.
+
+For an example of usage, couldn't go wrong with Andrew Knight's [Bulldoggy: The Reminders App](https://github.com/AutomationPanda/bulldoggy-reminders-app), where he builds a PyHAT-style app and uses `pytest` and `Playwright` for testing.
