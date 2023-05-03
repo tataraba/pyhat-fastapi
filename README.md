@@ -21,6 +21,8 @@
     - [Partials/Fragments](#partialsfragments)
     - [Forms](#forms)
     - [Testing](#testing)
+  - [Reproducibility](#reproducibility)
+  - [](#)
 
 ## About <a name = "about"></a>
 
@@ -154,6 +156,10 @@ At this point, a user can choose to run the `tailwindcss init` (Tailwind CLI) wh
 You can also manually kick off other CLI commands (such as the build) with `--watch` or `--minify`
 
 Although I did say that this is mostly non-trivial, it is a definite step that could be automated for a PyHAT type of application.
+
+Lastly, running the build command (with a watcher) is a bit of boilerplate that would be nice to automate. It's an easy step to forget.
+
+Elsewhere, I also included a subprocess command on app startup that ran the build command. This is especially useful to make sure your app has the most up-to-date css file.
 
 ### htmx
 
@@ -355,6 +361,21 @@ The TLDR version goes something like:
 - A package like `jinja2-fragments` allows you to render a _fragment_ of an existing template, without the need for multiple smaller files
 - You can read about this pattern over at htmx.org in an essay titled [Template Fragments](https://htmx.org/essays/template-fragments/)
 
+For now, I'll keep it as a dependency. It seems like depending on an external package to enable this pattern is necessary as of now.
+
+Ultimately, it would be great if Jinja2 enabled this pattern by default. It would need to provide a way to render a specific `{% block ... %}` of content without rendering the entire template.
+
+The `jinja2-fragments` library (for FastAPI) does this by identifying a specified block (through an attribute such as `block_name`) and rendering only the content contained within.
+
+Without out-of-the-box Jinja support, I think for now, even my "minimal" PyHAT FastAPI app would require this package
+
+```shell
+pdm add jinja2-fragments
+
+# using pip (make sure venv is active)
+python -m pip install jinja2-fragments
+```
+
 ### Forms
 
 Rendering forms in Django is, admittedly, pretty great because of the abstraction that allows you to define all input/validation in the same place.
@@ -378,3 +399,20 @@ I want to flesh this out more. I think testing would be a lot more manageable if
 But for more robust testing, I am thinking of [Playwright](https://playwright.dev/python/docs/intro), but I don't have much experience with it.
 
 For an example of usage, couldn't go wrong with Andrew Knight's [Bulldoggy: The Reminders App](https://github.com/AutomationPanda/bulldoggy-reminders-app), where he builds a PyHAT-style app and uses `pytest` and `Playwright` for testing.
+
+## Reproducibility
+
+I mentioned elsewhere that using a package manager to leverage the use of `pyproject.toml` and (if available) a lock file might be beneficial, but seems like an odd requirement.
+
+In that case, I would either add a pre-commit hook of some sort (if using a package manager) to export a regular, old requirements.txt file.
+
+To do that with `pdm`, you would need to include this command:
+
+```shell
+pdm export -o requirements.txt
+```
+
+That creates a `requirements.txt` file that includes hashed versions for all dependencies/subdependencies.
+
+
+##
