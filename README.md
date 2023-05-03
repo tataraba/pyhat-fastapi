@@ -424,8 +424,18 @@ Many of the opportunities for creativity are out there to explore, and I may tac
 If I wanted to outline the process to get to this point in the most "traditional" way possible, it would look something like this:
 
 1.  Create project root directory
-    1.  Use package manager to intsall dependencies in `pyproject.toml` or `requirements.txt`
+    1.  Use package manager to install dependencies in `pyproject.toml` or `requirements.txt`
     2.  Create directory structure outlined above
     3.  Choose database and corresponding ORM/ODM of choice and install those dependencies
 2.  Download htmx and copy file in `static` directory
 3.  Initiate `tailwindcss` in command line (which downloads/installs the binary)
+4.  Create a template structure
+    1.  Start with `base.html` that includes most of the meta tags
+    2.  Include css and htmx script tags
+    3.  Create `header.html` and `footer.html` as needed
+5.  Create config file in the `core` directory to start delineating project/app configuration
+6.  Start working on project logic
+
+That's not all _too_ bad, but there is definitely room to improve this workflow.
+
+In addition, there are several helpers that could be added to ease the htmx workflow in lieu of headers and fragments.
