@@ -12,6 +12,7 @@ dependencies = [
     "uvicorn[standard]>=0.22.0",
     "pytailwindcss>=0.1.4",
     "Jinja2>=3.1.2",
+    "jinja2-fragments>=0.3.0",
 ]
 requires-python = ">=3.11"
 license = {text = "MIT"}
