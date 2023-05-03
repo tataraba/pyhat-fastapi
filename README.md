@@ -22,7 +22,7 @@
     - [Forms](#forms)
     - [Testing](#testing)
   - [Reproducibility](#reproducibility)
-  - [](#)
+  - [What I've Learned](#what-ive-learned)
 
 ## About <a name = "about"></a>
 
@@ -415,4 +415,17 @@ pdm export -o requirements.txt
 That creates a `requirements.txt` file that includes hashed versions for all dependencies/subdependencies.
 
 
-##
+## What I've Learned
+
+There are plenty of places to introduce either existing tooling, or new interactions to help streamline a great PyHAT experience.
+
+Many of the opportunities for creativity are out there to explore, and I may tackle one (or more) of these, but probably not until after I take [another look](https://github.com/PyHAT-stack/awesome-python-htmx) at the tools that are already out there.
+
+If I wanted to outline the process to get to this point in the most "traditional" way possible, it would look something like this:
+
+1.  Create project root directory
+    1.  Use package manager to intsall dependencies in `pyproject.toml` or `requirements.txt`
+    2.  Create directory structure outlined above
+    3.  Choose database and corresponding ORM/ODM of choice and install those dependencies
+2.  Download htmx and copy file in `static` directory
+3.  Initiate `tailwindcss` in command line (which downloads/installs the binary)
